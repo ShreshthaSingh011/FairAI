@@ -3,14 +3,17 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LogisticRegression
 from fairlearn.metrics import demographic_parity_difference
-from google import genai
+import google.generativeai as genai
 import os
 from dotenv import load_dotenv
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+
+model = genai.GenerativeModel("gemini-pro")
 load_dotenv()
 # ---- CONFIG ----
 st.set_page_config(page_title="FairAI", page_icon="⚖️", layout="wide")
 
-client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+
 
 # ---- SESSION STATE ----
 if "bias" not in st.session_state:
@@ -121,10 +124,7 @@ if file:
                     Explain what this means, why it occurs, and how to reduce it.
                     """
 
-                    response = client.models.generate_content(
-                        model="gemini-2.0-flash",
-                        contents=prompt
-                    )
+                    response = model.generate_content("your prompt here")
 
                     st.write(response.text)
 
