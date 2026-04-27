@@ -3,3 +3,4 @@ pandas
 scikit-learn
 fairlearn
 google-generativeai
+matplotlib
