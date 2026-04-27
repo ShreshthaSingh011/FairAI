@@ -4,3 +4,4 @@ scikit-learn
 fairlearn
 google-generativeai
 matplotlib
+python-dotenv
